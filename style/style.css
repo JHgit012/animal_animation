@@ -1,0 +1,401 @@
+/* ==========================================
+GLOBAL RESET & BASE STYLES
+========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* 네온 붉은 모래 사막 느낌의 그라데이션 배경 */
+  background: radial-gradient(
+    circle at 50% 80%,
+    #913a04 0%,
+    #b43e04 50%,
+    #d2570b 100%
+  );
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.poster-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 60px;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+02. TYPOGRAPHY & LAYOUT
+========================================== */
+.poster-header {
+  z-index: 10;
+  pointer-events: none;
+}
+
+.poster-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.poster-subtitle {
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  margin-top: 8px;
+  opacity: 0.8;
+  text-transform: uppercase;
+}
+
+.poster-footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
+  z-index: 10;
+  pointer-events: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 20px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.poster-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #cccccc;
+  max-width: 480px;
+}
+
+.meta-item {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.meta-label {
+  font-weight: bold;
+  opacity: 0.5;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.additional-text {
+  position: absolute;
+  right: 60px;
+  top: 40px;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+}
+
+/* ==========================================
+03. GRAPHIC ELEMENTS & KEYFRAMES
+========================================== */
+.graphic-stage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+.motion-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 6초간 부드럽게 유지되는 미세 진동(트래블링) 이동 */
+  animation: lizardBaseMotion 6s ease-in-out infinite;
+}
+
+.motion-wrapper.paused {
+  animation-play-state: paused !important;
+}
+
+.frill-circle {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background-color: rgba(255, 136, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+  z-index: 1;
+}
+
+/* 가로 양옆 원 기본 위치 설정 (-120px, 120px) */
+.circle-left {
+  transform: translate(-120px, 0px);
+}
+
+.circle-right {
+  transform: translate(120px, 0px);
+}
+
+.lizard-triangle {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-left: 75px solid transparent;
+  border-right: 75px solid transparent;
+  border-top: 150px solid #ffd61d;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.lizard-triangle:hover {
+  filter: drop-shadow(0 0 10px rgba(148, 50, 8, 0.8));
+}
+
+.motion-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 애니메이션 속도를 4.5초로 단축하여 빠르게 이동 */
+  animation: lizardBaseMotion 4.5s ease-in-out infinite;
+}
+
+/* 좌우 ±500px 이동 + 상하 튕김 높이를 ±11px로 증가 + 속도감 있는 트래블링 키프레임 */
+@keyframes lizardBaseMotion {
+  0% {
+    transform: translate(-500px, 0px) scale(1) rotate(0deg);
+  }
+  5% {
+    transform: translate(-450px, -11px) scale(1.03, 0.97) rotate(-1deg);
+  }
+  10% {
+    transform: translate(-400px, 11px) scale(0.97, 1.03) rotate(1deg);
+  }
+  15% {
+    transform: translate(-350px, -11px) scale(1.03, 0.97) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-300px, 11px) scale(0.97, 1.03) rotate(1deg);
+  }
+  25% {
+    transform: translate(-250px, -11px) scale(1.03, 0.97) rotate(-1deg);
+  }
+  30% {
+    transform: translate(-200px, 11px) scale(0.97, 1.03) rotate(1deg);
+  }
+  35% {
+    transform: translate(-150px, -11px) scale(1.03, 0.97) rotate(-1deg);
+  }
+  40% {
+    transform: translate(-50px, 11px) scale(0.97, 1.03) rotate(1deg);
+  }
+  45% {
+    transform: translate(250px, -11px) scale(1.03, 0.97) rotate(-1deg);
+  }
+  50% {
+    transform: translate(500px, 0px) scale(1) rotate(0deg);
+  }
+  55% {
+    transform: translate(450px, -11px) scale(1.03, 0.97) rotate(1deg);
+  }
+  60% {
+    transform: translate(400px, 11px) scale(0.97, 1.03) rotate(-1deg);
+  }
+  65% {
+    transform: translate(350px, -11px) scale(1.03, 0.97) rotate(1deg);
+  }
+  70% {
+    transform: translate(300px, 11px) scale(0.97, 1.03) rotate(-1deg);
+  }
+  75% {
+    transform: translate(250px, -11px) scale(1.03, 0.97) rotate(1deg);
+  }
+  80% {
+    transform: translate(200px, 11px) scale(0.97, 1.03) rotate(-1deg);
+  }
+  85% {
+    transform: translate(150px, -11px) scale(1.03, 0.97) rotate(1deg);
+  }
+  90% {
+    transform: translate(-50px, 11px) scale(0.97, 1.03) rotate(-1deg);
+  }
+  95% {
+    transform: translate(-250px, -11px) scale(1.03, 0.97) rotate(1deg);
+  }
+  100% {
+    transform: translate(-500px, 0px) scale(1) rotate(0deg);
+  }
+}
+
+/* 왼쪽 원 상하 떨림 키프레임 */
+@keyframes verticalShakeLeft {
+  0% {
+    opacity: 0.95;
+    transform: translate(-120px, 0px);
+  }
+  8% {
+    opacity: 0.95;
+    transform: translate(-120px, -12px);
+  }
+  16% {
+    opacity: 0.95;
+    transform: translate(-120px, 12px);
+  }
+  24% {
+    opacity: 0.95;
+    transform: translate(-120px, -10px);
+  }
+  32% {
+    opacity: 0.95;
+    transform: translate(-120px, 10px);
+  }
+  40% {
+    opacity: 0.95;
+    transform: translate(-120px, -8px);
+  }
+  48% {
+    opacity: 0.95;
+    transform: translate(-120px, 8px);
+  }
+  56% {
+    opacity: 0.95;
+    transform: translate(-120px, -6px);
+  }
+  64% {
+    opacity: 0.95;
+    transform: translate(-120px, 6px);
+  }
+  72% {
+    opacity: 0.95;
+    transform: translate(-120px, -4px);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translate(-120px, 4px);
+  }
+  90% {
+    opacity: 0.95;
+    transform: translate(-120px, -2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-120px, 0px);
+  }
+}
+
+/* 오른쪽 원 상하 떨림 키프레임 */
+@keyframes verticalShakeRight {
+  0% {
+    opacity: 0.95;
+    transform: translate(120px, 0px);
+  }
+  8% {
+    opacity: 0.95;
+    transform: translate(120px, -12px);
+  }
+  16% {
+    opacity: 0.95;
+    transform: translate(120px, 12px);
+  }
+  24% {
+    opacity: 0.95;
+    transform: translate(120px, -10px);
+  }
+  32% {
+    opacity: 0.95;
+    transform: translate(120px, 10px);
+  }
+  40% {
+    opacity: 0.95;
+    transform: translate(120px, -8px);
+  }
+  48% {
+    opacity: 0.95;
+    transform: translate(120px, 8px);
+  }
+  56% {
+    opacity: 0.95;
+    transform: translate(120px, -6px);
+  }
+  64% {
+    opacity: 0.95;
+    transform: translate(120px, 6px);
+  }
+  72% {
+    opacity: 0.95;
+    transform: translate(120px, -4px);
+  }
+  80% {
+    opacity: 0.95;
+    transform: translate(120px, 4px);
+  }
+  90% {
+    opacity: 0.95;
+    transform: translate(120px, -2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(120px, 0px);
+  }
+}
+
+.circle-left.active-shake {
+  animation: verticalShakeLeft 1.2s ease-in-out forwards;
+}
+
+.circle-right.active-shake {
+  animation: verticalShakeRight 1.2s ease-in-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-wrapper {
+    animation: none !important;
+  }
+  .circle-left.active-shake,
+  .circle-right.active-shake {
+    animation: none !important;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .poster-title {
+    font-size: 2.2rem;
+  }
+  .poster-subtitle {
+    font-size: 1.2rem;
+  }
+  .poster-footer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .additional-text {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-top: 10px;
+  }
+}
